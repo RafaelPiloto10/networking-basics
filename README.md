@@ -6,3 +6,4 @@ Learning networking basics using Golang
 
 - UDP
 - TCP
+- gRPC
