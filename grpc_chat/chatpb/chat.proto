@@ -1,0 +1,35 @@
+syntax = "proto3";
+package chat;
+option go_package = "./chatpb";
+
+message Account {
+	uint32 id = 1;
+	string channel = 2;
+}
+
+message Message {
+	string body = 1;
+	uint32 sender_id = 2;
+	uint32 receiver_id = 3;
+	string channel_name = 4;
+}
+
+message Response {
+	enum ResponseStatus {
+		ERROR = 0;
+		OK = 1;
+	}
+
+	ResponseStatus status = 1;
+}
+
+
+service Server {
+	rpc JoinChannel(Account) returns (stream Message) {}
+	rpc LeaveChannel(Account) returns (Empty) {}
+	rpc SendMessage(Message) returns (Response) {}
+}
+
+message Empty {
+
+}
